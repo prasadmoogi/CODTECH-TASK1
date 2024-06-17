@@ -1,0 +1,63 @@
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.grades = {}
+
+    def add_grade(self, subject, grade):
+        if subject in self.grades:
+            self.grades[subject].append(grade)
+        else:
+            self.grades[subject] = [grade]
+
+    def calculate_average(self):
+        total_grades = 0
+        count = 0
+        for grades in self.grades.values():
+            total_grades += sum(grades)
+            count += len(grades)
+        return total_grades / count if count != 0 else 0
+
+    def determine_letter_grade(self, average):
+        if average >= 90:
+            return 'A'
+        elif average >= 80:
+            return 'B'
+        elif average >= 70:
+            return 'C'
+        elif average >= 60:
+            return 'D'
+        else:
+            return 'F'
+
+    def display_overall_grade(self):
+        average = self.calculate_average()
+        letter_grade = self.determine_letter_grade(average)
+        print(f"Student: {self.name}")
+        print(f"Average Grade: {average:.2f}")
+        print(f"GPA : {letter_grade}")
+        print("-" * 30)
+
+def main():
+    students_data = {
+        "Prasad moogi": {"Math": 100, "Science": 100, "History": 100, "English": 100, "Art": 100},
+        "Amitabh Bachchan": {"Math": 85, "Science": 90, "History": 78, "English": 88, "Art": 92},
+        "Einstein": {"Math": 75, "Science": 80, "History": 70, "English": 78, "Art": 82},
+        "Magnus": {"Math": 65, "Science": 70, "History": 68, "English": 72, "Art": 75},
+        "S.S.Rajamouli": {"Math": 95, "Science": 92, "History": 88, "English": 90, "Art": 94},
+        "Aryabatta": {"Math": 55, "Science": 60, "History": 58, "English": 62, "Art": 65},
+        "Viswanadh anand": {"Math": 85, "Science": 88, "History": 82, "English": 84, "Art": 87},
+    }
+
+    students = []
+    for name, grades in students_data.items():
+        student = Student(name)
+        for subject, grade in grades.items():
+            student.add_grade(subject, grade)
+        students.append(student)
+
+    for student in students:
+        student.display_overall_grade()
+
+if __name__ == "__main__":
+    main()
