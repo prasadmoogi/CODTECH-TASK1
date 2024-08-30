@@ -1,4 +1,4 @@
-#hi iam using execute this code by using some random examples for students_data  
+#hi iam execute this code by using some random examples for students_data  
 class Student:
     def __init__(self, name):
         self.name = name
